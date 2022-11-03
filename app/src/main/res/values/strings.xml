@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Note Application</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_to_the_noteapp_text">Login To The NoteApp</string>
+    <string name="enter_your_email_text">Enter your email</string>
+    <string name="enter_your_password_text">Enter your password</string>
+    <string name="have_no_account_register_here_text">Have no account? Register Here!</string>
+    <string name="login_text">Login</string>
+</resources>
