@@ -11,7 +11,7 @@
         android:id="@+id/loginText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/freesansbold"
         android:text="@string/login_to_the_noteapp_text"
         android:textAlignment="center"
@@ -23,40 +23,62 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="20dp"
         android:fontFamily="@font/freesans"
         android:hint="@string/enter_your_email_text"
+        android:background="@drawable/edittext"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="10dp"
+        android:inputType="textEmailAddress"
+        android:padding="8dp"
         app:layout_constraintTop_toBottomOf="@+id/loginText" />
 
     <EditText
+        android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/edittext"
+        android:drawableStart="@drawable/ic_lock"
+        android:drawablePadding="10dp"
         android:fontFamily="@font/freesans"
         android:hint="@string/enter_your_password_text"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/enterEmail" />
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/enterEmail"
+        tools:layout_editor_absoluteX="30dp" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="25dp"
         android:fontFamily="@font/freesansbold"
-        android:gravity="center_horizontal"
         android:text="@string/login_text"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:background="@drawable/button_drawable"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/redirectRegisterButton" />
 
     <TextView
+        android:id="@+id/redirectRegisterButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/freesansbold"
         android:text="@string/have_no_account_register_here_text"
         android:textAlignment="center"
         android:textColor="@color/purple_200"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintBottom_toTopOf="@+id/illustration" />
+
+    <ImageView
+        android:id="@+id/illustration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/write_illustration"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

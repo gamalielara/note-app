@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterFragment">
+    tools:context=".LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/loginText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/freesansbold"
+        android:text="Register to the NoteApp"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/enterEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="20dp"
+        android:fontFamily="@font/freesans"
+        android:hint="@string/enter_your_email_text"
+        android:background="@drawable/edittext"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="10dp"
+        android:inputType="textEmailAddress"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/loginText" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/edittext"
+        android:drawableStart="@drawable/ic_lock"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/freesans"
+        android:hint="@string/enter_your_password_text"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/enterEmail"
+        tools:layout_editor_absoluteX="30dp" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginBottom="25dp"
+        android:fontFamily="@font/freesansbold"
+        android:text="@string/register"
+        android:background="@drawable/button_drawable"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/redirectLoginButton" />
+
+    <TextView
+        android:id="@+id/redirectLoginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="25dp"
+        android:fontFamily="@font/freesansbold"
+        android:text="@string/already_have_an_account_login_here"
+        android:textAlignment="center"
+        android:textColor="@color/purple_200"
+        app:layout_constraintBottom_toTopOf="@+id/illustration" />
+
+    <ImageView
+        android:id="@+id/illustration"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:background="@drawable/mobile_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
