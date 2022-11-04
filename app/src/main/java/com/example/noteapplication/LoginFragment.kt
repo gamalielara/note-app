@@ -25,7 +25,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (userModel.getUsername() != null) {
+        if (userModel.isLogedIn()) {
             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
         return inflater.inflate(R.layout.fragment_login, container, false)
@@ -56,6 +56,5 @@ class LoginFragment : Fragment() {
         enterPassword.doOnTextChanged { text, _, _, _ ->
             PASSWORD = text.toString()
         }
-
     }
 }
