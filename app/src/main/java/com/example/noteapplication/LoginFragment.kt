@@ -11,14 +11,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_login.*
 
-private var USERNAME: String = ""
-private var PASSWORD: String = ""
-
 class LoginFragment : Fragment() {
     private val userModel: LoginViewModel by activityViewModels()
 
+    private var USERNAME: String = ""
+    private var PASSWORD: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        USERNAME = ""
+        PASSWORD = ""
     }
 
     override fun onCreateView(
@@ -49,11 +51,11 @@ class LoginFragment : Fragment() {
             findNavController().navigate((R.id.action_loginFragment_to_registerFragment))
         }
 
-        enterEmail.doOnTextChanged { text, _, _, _ ->
+        enterUsernameLogin.doOnTextChanged { text, _, _, _ ->
             USERNAME = text.toString()
         }
 
-        enterPassword.doOnTextChanged { text, _, _, _ ->
+        enterPasswordLogin.doOnTextChanged { text, _, _, _ ->
             PASSWORD = text.toString()
         }
     }

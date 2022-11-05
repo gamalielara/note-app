@@ -18,6 +18,14 @@ class RegisterFragment : Fragment() {
 
     private val userModel: LoginViewModel by activityViewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        USERNAME = ""
+        EMAIL = ""
+        PASSWORD = ""
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
