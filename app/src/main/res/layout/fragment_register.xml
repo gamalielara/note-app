@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    tools:context=".LoginFragment"
+    android:background="@color/primary">
 
     <TextView
         android:id="@+id/loginText"
@@ -85,7 +86,7 @@
         android:fontFamily="@font/freesansbold"
         android:text="@string/already_have_an_account_login_here"
         android:textAlignment="center"
-        android:textColor="@color/purple_200"
+        android:textColor="@color/secondary"
         app:layout_constraintBottom_toTopOf="@+id/illustration" />
 
     <ImageView

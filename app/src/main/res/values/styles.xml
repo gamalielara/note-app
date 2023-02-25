@@ -4,6 +4,9 @@
     <style name="textEditStyle">
         <item name="android:padding">8dp</item>
         <item name="borderRound">10dp</item>
-        <item name="textInputOutlinedStyle">@color/purple_200</item>
+        <item name="textInputOutlinedStyle">@color/secondary</item>
+    </style>
+    <style name="appFontStyle">
+        <item name="fontFamily">@font/nunito_sans_regular</item>
     </style>
 </resources>

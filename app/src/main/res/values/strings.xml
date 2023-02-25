@@ -8,11 +8,14 @@
     <string name="have_no_account_register_here_text">Have no account? Register Here!</string>
     <string name="login_text">Login</string>
     <string name="welcome_text">Welcome, User!</string>
-    <string name="noteapp_by_ara_gamaliel_text">NoteApp by Ara Gamaliel</string>
+    <string name="noteapp_by_ara_gamaliel_text">NoteApp</string>
     <string name="create_your_note_here_text">Create your note here.</string>
     <string name="logout_text">Logout</string>
     <string name="register">Register</string>
     <string name="already_have_an_account_login_here">Already have an account? Login here</string>
     <string name="enter_your_username">Enter your username</string>
     <string name="enter_your_username_text">Enter your username</string>
+    <string name="plus_text">+</string>
+    <string name="created_at">Created at:</string>
+    <string name="hello_it_s_me">Hello, It\'s me!</string>
 </resources>

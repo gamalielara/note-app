@@ -5,14 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".LoginFragment">
 
     <TextView
         android:id="@+id/loginText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:fontFamily="@font/freesansbold"
+        android:layout_marginTop="120dp"
+        android:textColor="@color/secondary"
         android:text="@string/login_to_the_noteapp_text"
         android:textAlignment="center"
         android:textSize="25sp"
@@ -24,13 +25,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginVertical="20dp"
-        android:fontFamily="@font/freesans"
         android:hint="@string/enter_your_username_text"
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/ic_person"
         android:drawablePadding="10dp"
         android:inputType="textEmailAddress"
         android:padding="8dp"
+        android:textColor="@color/secondary"
+        android:textColorHint="@color/secondary"
         app:layout_constraintTop_toBottomOf="@+id/loginText" />
 
     <EditText
@@ -42,11 +44,12 @@
         android:background="@drawable/edittext"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="10dp"
-        android:fontFamily="@font/freesans"
         android:hint="@string/enter_your_password_text"
         android:inputType="textPassword"
         android:padding="8dp"
         app:layout_constraintTop_toBottomOf="@+id/enterUsernameLogin"
+        android:textColor="@color/secondary"
+        android:textColorHint="@color/secondary"
         tools:layout_editor_absoluteX="30dp" />
 
     <Button
@@ -54,12 +57,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
-        android:layout_marginBottom="25dp"
-        android:fontFamily="@font/freesansbold"
-        android:text="@string/login_text"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/button_drawable"
+        android:fontFamily="@font/nunito_sans_regular"
+        android:text="@string/login_text"
         android:textAllCaps="false"
         android:textSize="20sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toTopOf="@+id/redirectRegisterButton" />
 
     <TextView
@@ -67,18 +72,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:fontFamily="@font/freesansbold"
+        android:textColor="@color/secondary"
         android:text="@string/have_no_account_register_here_text"
         android:textAlignment="center"
-        android:textColor="@color/purple_200"
+        android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/illustration" />
 
     <ImageView
         android:id="@+id/illustration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/write_illustration"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/learning_bro"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
