@@ -17,4 +17,7 @@ data class Note(
 
     @ColumnInfo(name = "created_time")
     var createdTime: Long = System.currentTimeMillis(),
+
+    @ColumnInfo(name = "body")
+    var body: String = "",
 )

@@ -1,10 +1,12 @@
 package com.example.noteapplication.data
 
 import android.graphics.drawable.GradientDrawable
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapplication.R
 import com.example.noteapplication.database.Note
@@ -38,6 +40,16 @@ class NoteAdapter(
                     noteColorsArray[i]
                 )
             )
+
+            val noteId = noteList[position].id ?: 0
+            val bundle = Bundle()
+            bundle.putInt("noteId", noteId)
+            noteBox.setOnClickListener {
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_noteEditorFragment,
+                    bundle
+                )
+            }
         }
 
     }

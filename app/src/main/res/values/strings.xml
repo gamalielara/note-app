@@ -18,4 +18,6 @@
     <string name="plus_text">+</string>
     <string name="created_at">Created at:</string>
     <string name="hello_it_s_me">Hello, It\'s me!</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis fringilla ante, et sagittis libero condimentum vitae. Integer augue tortor, convallis quis bibendum sit amet, ullamcorper eu arcu. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis sit amet laoreet lorem. Quisque sed nisl nec ipsum tempor sodales sed non nulla. Aenean eget est non tellus sollicitudin blandit. Cras ac magna felis. Quisque mattis a erat eget convallis. Nunc eu leo at justo viverra finibus. Phasellus rutrum libero massa. Nunc id sollicitudin mi. Nunc blandit arcu iaculis velit vestibulum, at molestie lacus elementum.</string>
+    <string name="hello_world_this_is_a_note">Hello World! This is A Note</string>
 </resources>

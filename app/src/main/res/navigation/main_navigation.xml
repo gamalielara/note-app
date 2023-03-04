@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_noteEditorFragment"
+            app:destination="@id/noteEditorFragment" />
     </fragment>
 
     <fragment
@@ -38,6 +41,15 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteEditorFragment"
+        android:name="com.example.noteapplication.NoteEditorFragment"
+        android:label="fragment_note_editor"
+        tools:layout="@layout/fragment_note_editor" >
+        <action
+            android:id="@+id/action_noteEditorFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>
