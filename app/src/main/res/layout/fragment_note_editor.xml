@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    tools:context=".NoteEditorFragment">
+    tools:context=".ui.NoteEditorFragment">
 
     <Button
         android:id="@+id/backButton"
@@ -32,13 +32,27 @@
         app:iconTint="@color/secondary"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/saveNoteButton"
+        android:layout_width="57dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button_bg_tertiary"
+        app:backgroundTint="@null"
+        app:icon="@drawable/save"
+        app:iconTint="@color/secondary"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/noteTitleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_note"
+        android:fontFamily="@font/nunito_sans_regular"
         android:text="@string/hello_world_this_is_a_note"
         android:textColor="@color/secondary"
         android:textSize="35sp"
@@ -46,17 +60,28 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/backButton" />
 
-    <TextView
-        android:id="@+id/noteBodyText"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/lorem_ipsum"
-        android:textColor="@color/secondary"
-        android:textSize="20sp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/noteTitleText" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/noteTitleText">
+
+        <EditText
+            android:id="@+id/noteBodyText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/edit_note"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:paddingBottom="75dp"
+            android:text="@string/lorem_ipsum"
+            android:textColor="@color/secondary"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent" />
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.noteapplication
+package com.example.noteapplication.viewmodel
 
 import android.app.Application
 import android.util.Log

@@ -1,15 +1,16 @@
-package com.example.noteapplication
+package com.example.noteapplication.ui
 
 import android.os.Bundle
-import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.noteapplication.R
 import com.example.noteapplication.data.NoteDummyData
 import com.example.noteapplication.database.NotesDatabase
+import com.example.noteapplication.viewmodel.NoteViewModel
+import com.example.noteapplication.viewmodel.NoteViewModelFactory
 import kotlinx.android.synthetic.main.fragment_note_editor.*
 
 class NoteEditorFragment : Fragment() {
@@ -44,20 +45,53 @@ class NoteEditorFragment : Fragment() {
         setupNoteUI()
     }
 
+    private fun onBackButtonPressed() {
+        val activity = requireActivity() as MainActivity
+        activity.onBackPressed()
+    }
+
     private fun setupNoteUI() {
-        if (noteId == null) return;
 //            val thisNote = noteViewModel.getNote(noteId!!) ?: return
-        val thisNote = NoteDummyData.find { it.id == noteId } ?: return
-        Log.e("HELLO", thisNote.title)
+        val thisNote = NoteDummyData.find { it.id == noteId }
 
-        noteTitleText.text = thisNote.title
-        noteBodyText.text = thisNote.body
+        if (noteId != null) {
+            if (thisNote == null) return;
 
+            setOnNoteEditingMode(false)
 
-        editNoteButton.setOnClickListener {
-            noteTitleText.inputType = InputType.TYPE_CLASS_TEXT
-            noteBodyText.inputType = InputType.TYPE_CLASS_TEXT
+            noteTitleText.setText(thisNote.title)
+            noteBodyText.setText(thisNote.body)
+        } else {
+            setOnNoteEditingMode(true)
+            noteTitleText.setText("Note Title")
+            noteBodyText.setText("")
         }
 
+        editNoteButton.setOnClickListener {
+            setOnNoteEditingMode(true)
+        }
+
+        saveNoteButton.setOnClickListener {
+            setOnNoteEditingMode(false)
+        }
+
+        backButton.setOnClickListener {
+            onBackButtonPressed()
+        }
+
+    }
+
+    private fun setOnNoteEditingMode(editingMode: Boolean) {
+        if (editingMode) {
+            editNoteButton.visibility = View.GONE
+            saveNoteButton.visibility = View.VISIBLE
+            noteTitleText.isEnabled = true
+            noteBodyText.isEnabled = true
+        } else {
+            editNoteButton.visibility = View.VISIBLE
+            saveNoteButton.visibility = View.GONE
+            noteTitleText.isEnabled = false
+            noteBodyText.isEnabled = false
+        }
     }
 }

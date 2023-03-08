@@ -1,26 +1,27 @@
-package com.example.noteapplication
+package com.example.noteapplication.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.noteapplication.R
 import com.example.noteapplication.data.NoteAdapter
-import com.example.noteapplication.data.NoteDummyData
-import com.example.noteapplication.database.NoteDao
 import com.example.noteapplication.database.NotesDatabase
+import com.example.noteapplication.viewmodel.LoginViewModel
+import com.example.noteapplication.viewmodel.NoteViewModel
+import com.example.noteapplication.viewmodel.NoteViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
     private val userModel: LoginViewModel by activityViewModels()
+    private lateinit var noteViewModel: NoteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class HomeFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val data = NotesDatabase.getInstance(application).noteDatabaseDao
         val noteViewModelFactory = NoteViewModelFactory(data, application)
-        val noteViewModel = ViewModelProvider(this, noteViewModelFactory).get(NoteViewModel::class.java)
+        noteViewModel = ViewModelProvider(this, noteViewModelFactory).get(NoteViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -45,17 +46,40 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Toast.makeText(activity, "Hello,${userModel.getUsername()}! Welcome to NoteApp created by Ara Gamaliel!!", Toast.LENGTH_LONG).show()
 
+        Toast.makeText(
+            activity,
+            "Hello,${userModel.getUsername()}! Welcome to NoteApp created by Ara Gamaliel!!",
+            Toast.LENGTH_LONG
+        ).show()
 
-        logoutButton.setOnClickListener{
+        var notesData = noteViewModel.getNotes()
+
+        addNoteButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_noteEditorFragment, null)
+        }
+
+        logoutButton.setOnClickListener {
             Toast.makeText(activity, "Success Logged Out!", Toast.LENGTH_LONG).show()
             userModel.logOutHandler()
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         }
 
-        val noteAdapter = NoteAdapter(NoteDummyData)
-        notes.adapter = noteAdapter
-        notes.layoutManager = LinearLayoutManager(activity )
+        notesData.observe(requireActivity(), Observer { note ->
+            val noteAdapter = NoteAdapter(note)
+            notes.adapter = noteAdapter
+            notes.layoutManager = LinearLayoutManager(activity)
+
+            if(note.isEmpty()){
+                noNotesIllustration.setImageResource(R.drawable.no_note)
+                noNotesSection.visibility = View.VISIBLE
+            } else {
+                noNotesSection.visibility = View.GONE
+            }
+
+
+        })
+
+
     }
 }
