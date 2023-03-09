@@ -1,14 +1,10 @@
 package com.example.noteapplication.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.noteapplication.database.Note
 import com.example.noteapplication.database.NoteDao
-import kotlinx.coroutines.launch
 
 class NoteViewModel(
     private val database: NoteDao,
@@ -21,5 +17,13 @@ class NoteViewModel(
 
     fun getNotes(): LiveData<List<Note>> {
         return database.getNotes()
+    }
+
+    fun addNote(note: Note) {
+        return database.addNote(note)
+    }
+
+    fun editNote(note: Note) {
+        return database.updateNote(note)
     }
 }
