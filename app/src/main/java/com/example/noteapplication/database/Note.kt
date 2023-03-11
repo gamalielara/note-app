@@ -3,6 +3,7 @@ package com.example.noteapplication.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.noteapplication.constants.NoteColors
 
 @Entity(tableName = "notes_table")
 data class Note(
@@ -18,6 +19,10 @@ data class Note(
     @ColumnInfo(name = "created_time")
     var createdTime: Long = System.currentTimeMillis(),
 
+    @ColumnInfo(name = "note_color")
+    var noteColor: String? = null,
+
     @ColumnInfo(name = "body")
     var body: String = "",
+
 )

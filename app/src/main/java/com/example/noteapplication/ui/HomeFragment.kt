@@ -1,7 +1,6 @@
 package com.example.noteapplication.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,12 +68,12 @@ class HomeFragment : Fragment(), LifecycleObserver {
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         }
 
-        notesData.observe(requireActivity(), Observer { note ->
-            val noteAdapter = NoteAdapter(note)
+        notesData.observe(viewLifecycleOwner, Observer { note ->
+            val noteAdapter = NoteAdapter(note, { noteId -> onDeleteNote(noteId) })
             notes.adapter = noteAdapter
             notes.layoutManager = LinearLayoutManager(activity)
 
-            if(note.isEmpty()){
+            if (note.isEmpty()) {
                 noNotesIllustration.setImageResource(R.drawable.no_note)
                 noNotesSection.visibility = View.VISIBLE
             } else {
@@ -93,5 +92,7 @@ class HomeFragment : Fragment(), LifecycleObserver {
         lifecycle.addObserver(this)
     }
 
-
+    private fun onDeleteNote(noteId: Int) {
+        noteViewModel.deleteNote(noteId)
+    }
 }

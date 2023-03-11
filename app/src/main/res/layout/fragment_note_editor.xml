@@ -60,6 +60,72 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/backButton" />
 
+    <RadioGroup
+        android:id="@+id/colorPickerGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/noteTitleText"
+        android:layout_marginTop="15dp">
+
+        <RadioButton
+            android:id="@+id/blueColorButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/note_color_picker"
+            android:backgroundTint="@color/note_blue"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/greenColorButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/note_color_picker"
+            android:backgroundTint="@color/note_green"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/magentaColorButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/note_color_picker"
+            android:backgroundTint="@color/note_magenta"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/pinkColorButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/note_color_picker"
+            android:backgroundTint="@color/note_pink"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/purpleColorButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/note_color_picker"
+            android:backgroundTint="@color/note_purple"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/yellowColorButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/note_color_picker"
+            android:backgroundTint="@color/note_yellow"
+            android:button="@null" />
+    </RadioGroup>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -67,7 +133,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/noteTitleText">
+        app:layout_constraintTop_toBottomOf="@id/colorPickerGroup">
 
         <EditText
             android:id="@+id/noteBodyText"

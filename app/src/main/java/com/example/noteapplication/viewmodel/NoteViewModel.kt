@@ -26,4 +26,8 @@ class NoteViewModel(
     fun editNote(note: Note) {
         return database.updateNote(note)
     }
+
+    fun deleteNote(noteId: Int){
+        return database.deleteNote(noteId)
+    }
 }

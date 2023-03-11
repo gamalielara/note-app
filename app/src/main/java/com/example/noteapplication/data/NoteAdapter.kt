@@ -6,16 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapplication.R
+import com.example.noteapplication.constants.NoteColorsValue
 import com.example.noteapplication.database.Note
+import com.example.noteapplication.database.NoteDao
+import com.example.noteapplication.database.NotesDatabase
+import com.example.noteapplication.viewmodel.NoteViewModel
+import com.example.noteapplication.viewmodel.NoteViewModelFactory
 import kotlinx.android.synthetic.main.note_layout.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class NoteAdapter(
-    private val noteList: List<Note>
+    private val noteList: List<Note>,
+    private val onDeleteNote:  ((noteId: Int) -> Unit)? = null
 ) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
@@ -33,11 +40,11 @@ class NoteAdapter(
             val simpleDateFormat = SimpleDateFormat("EE, MMM dd YYYY")
             noteCreatedAt.text = simpleDateFormat.format(date)
 
-            val i = (noteColorsArray.indices).random()
+
             (noteBox.background as GradientDrawable).setColor(
                 ContextCompat.getColor(
                     context,
-                    noteColorsArray[i]
+                    NoteColorsValue::class.java.getDeclaredField(noteList[position].noteColor).get(null) as Int
                 )
             )
 
@@ -49,6 +56,10 @@ class NoteAdapter(
                     R.id.action_homeFragment_to_noteEditorFragment,
                     bundle
                 )
+            }
+
+            deleteNoteButton.setOnClickListener{
+                onDeleteNote?.invoke(noteList[position].id ?: 0)
             }
         }
 

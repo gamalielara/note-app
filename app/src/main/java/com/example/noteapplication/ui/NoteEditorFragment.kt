@@ -7,9 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.noteapplication.R
+import com.example.noteapplication.constants.NoteColors
 import com.example.noteapplication.database.Note
 import com.example.noteapplication.database.NotesDatabase
 import com.example.noteapplication.viewmodel.NoteViewModel
@@ -20,16 +22,12 @@ class NoteEditorFragment : Fragment() {
     private val ARG_NOTE_EDITOR = "noteId"
     private var noteId: Int? = null
     private lateinit var noteViewModel: NoteViewModel
-
-    private var note = Note(
-        title = "",
-        body = "",
-        createdTime = 0,
-        lastEdited = 0,
-    )
+    private lateinit var note: Note
+    private var isNewNote: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             noteId = it.getInt(ARG_NOTE_EDITOR)
         }
@@ -45,8 +43,6 @@ class NoteEditorFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_note_editor, container, false)
     }
 
@@ -60,40 +56,35 @@ class NoteEditorFragment : Fragment() {
         activity.onBackPressed()
     }
 
+    private fun decideIsNewNote(): Boolean {
+        return noteId == null || noteViewModel.getNote(noteId!!) == null
+    }
+
     private fun setupNoteUI() {
-        var isNewNote = true
-//        val thisNote = NoteDummyData.find { it.id == noteId }
+        isNewNote = decideIsNewNote()
 
-        if (noteId != null) {
-            val thisNote = noteViewModel.getNote(noteId!!)
-            if (thisNote == null) return;
-
-            isNewNote = false
-            setOnNoteEditingMode(isNewNote)
-
-            noteTitleText.setText(thisNote.title)
-            noteBodyText.setText(thisNote.body)
-
-            note = thisNote
-        } else {
-            isNewNote = true
-            setOnNoteEditingMode(isNewNote)
+        if (isNewNote) {
+            note = Note(
+                title = "",
+                body = "",
+                createdTime = 0,
+                lastEdited = 0,
+                noteColor = NoteColors.BLUE
+            )
+            setOnNoteEditingMode(true)
             noteTitleText.setText("Note Title")
             noteBodyText.setText("")
-        }
 
-        editNoteButton.setOnClickListener {
-            setOnNoteEditingMode(true)
-        }
-
-        saveNoteButton.setOnClickListener {
-            saveNote(isNewNote)
+        } else {
+            note = noteViewModel.getNote(noteId!!) ?: note
             setOnNoteEditingMode(false)
+            noteTitleText.setText(note.title)
+            noteBodyText.setText(note.body)
         }
 
-        backButton.setOnClickListener {
-            onBackButtonPressed()
-        }
+        setButtonsListeners()
+
+        setColorNote()
 
         noteTitleText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -123,22 +114,94 @@ class NoteEditorFragment : Fragment() {
             saveNoteButton.visibility = View.VISIBLE
             noteTitleText.isEnabled = true
             noteBodyText.isEnabled = true
+            colorPickerGroup.visibility = View.VISIBLE
         } else {
             editNoteButton.visibility = View.VISIBLE
             saveNoteButton.visibility = View.GONE
             noteTitleText.isEnabled = false
             noteBodyText.isEnabled = false
+            colorPickerGroup.visibility = View.GONE
         }
     }
 
     private fun saveNote(isNewNote: Boolean) {
         note.lastEdited = System.currentTimeMillis()
+
+        if (note.noteColor == null) note.noteColor = NoteColors.BLUE
+
         if (isNewNote) {
             note.createdTime = System.currentTimeMillis()
             noteViewModel.addNote(note)
             Log.e("HELLO ARA GAMALIEL", note.toString())
+            Toast.makeText(requireActivity(), "Note successfully created", Toast.LENGTH_SHORT)
+                .show()
         } else {
             noteViewModel.editNote(note)
+            Toast.makeText(requireActivity(), "Note successfully edited", Toast.LENGTH_SHORT).show()
+        }
+        Log.e("NOTE SAVED", note.toString())
+    }
+
+    private fun setColorNote() {
+        when (note.noteColor) {
+            NoteColors.BLUE -> blueColorButton.isChecked = true
+            NoteColors.GREEN -> greenColorButton.isChecked = true
+            NoteColors.MAGENTA -> magentaColorButton.isChecked = true
+            NoteColors.PINK -> pinkColorButton.isChecked = true
+            NoteColors.PURPLE -> purpleColorButton.isChecked = true
+            NoteColors.YELLOW -> yellowColorButton.isChecked = true
+        }
+    }
+
+    private fun setButtonsListeners() {
+        editNoteButton.setOnClickListener {
+            setOnNoteEditingMode(true)
+        }
+
+        saveNoteButton.setOnClickListener {
+            saveNote(isNewNote)
+            setOnNoteEditingMode(false)
+        }
+
+        backButton.setOnClickListener {
+            onBackButtonPressed()
+        }
+
+        blueColorButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                note.noteColor = NoteColors.BLUE
+            }
+        }
+
+        greenColorButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                note.noteColor = NoteColors.GREEN
+            }
+            Log.e("NOTE GREEN ", note.noteColor.toString())
+        }
+
+        magentaColorButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                note.noteColor = NoteColors.MAGENTA
+            }
+        }
+
+        pinkColorButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                note.noteColor = NoteColors.PINK
+            }
+        }
+
+        purpleColorButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                note.noteColor = NoteColors.PURPLE
+            }
+        }
+
+        yellowColorButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                note.noteColor = NoteColors.YELLOW
+            }
         }
     }
 }
