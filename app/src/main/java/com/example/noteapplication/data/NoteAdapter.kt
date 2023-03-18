@@ -12,10 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapplication.R
 import com.example.noteapplication.constants.NoteColorsValue
 import com.example.noteapplication.database.Note
-import com.example.noteapplication.database.NoteDao
-import com.example.noteapplication.database.NotesDatabase
-import com.example.noteapplication.viewmodel.NoteViewModel
-import com.example.noteapplication.viewmodel.NoteViewModelFactory
 import kotlinx.android.synthetic.main.note_layout.view.*
 import java.text.SimpleDateFormat
 import java.util.*

@@ -12,11 +12,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapplication.R
 import com.example.noteapplication.data.NoteAdapter
 import com.example.noteapplication.database.Note
 import com.example.noteapplication.database.NotesDatabase
+import com.example.noteapplication.utils.SwipeGesture
 import com.example.noteapplication.viewmodel.LoginViewModel
 import com.example.noteapplication.viewmodel.NoteViewModel
 import com.example.noteapplication.viewmodel.NoteViewModelFactory
@@ -53,7 +56,7 @@ class HomeFragment : Fragment(), LifecycleObserver {
         Toast.makeText(
             activity,
             "Hello,${userModel.getUsername()}! Welcome to NoteApp created by Ara Gamaliel!!",
-            Toast.LENGTH_LONG
+            Toast.LENGTH_SHORT
         ).show()
 
         notesData = noteViewModel.getNotes()
@@ -72,6 +75,18 @@ class HomeFragment : Fragment(), LifecycleObserver {
             val noteAdapter = NoteAdapter(note, { noteId -> onDeleteNote(noteId) })
             notes.adapter = noteAdapter
             notes.layoutManager = LinearLayoutManager(activity)
+
+            val notesSwipeGesture = object : SwipeGesture() {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val position = viewHolder.adapterPosition
+                    note[position].id?.let { note -> onDeleteNote(note) }
+                    Toast.makeText(activity, "Note ${note[position].title} is successfully deleted!", Toast.LENGTH_LONG).show()
+                    super.onSwiped(viewHolder, direction)
+                }
+            }
+
+            val itemTouchHelper = ItemTouchHelper(notesSwipeGesture)
+            itemTouchHelper.attachToRecyclerView(notes)
 
             if (note.isEmpty()) {
                 noNotesIllustration.setImageResource(R.drawable.no_note)
