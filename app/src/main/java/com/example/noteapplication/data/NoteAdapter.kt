@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapplication.R
@@ -17,8 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class NoteAdapter(
-    private val noteList: List<Note>,
-    private val onDeleteNote:  ((noteId: Int) -> Unit)? = null
+    private val noteList: List<Note>
 ) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
@@ -52,10 +50,6 @@ class NoteAdapter(
                     R.id.action_homeFragment_to_noteEditorFragment,
                     bundle
                 )
-            }
-
-            deleteNoteButton.setOnClickListener{
-                onDeleteNote?.invoke(noteList[position].id ?: 0)
             }
         }
 

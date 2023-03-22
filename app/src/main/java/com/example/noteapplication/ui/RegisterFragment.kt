@@ -1,5 +1,7 @@
 package com.example.noteapplication.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.noteapplication.R
-import com.example.noteapplication.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_register.*
 
 class RegisterFragment : Fragment() {
@@ -18,10 +18,13 @@ class RegisterFragment : Fragment() {
     private var EMAIL = ""
     private var PASSWORD = ""
 
-    private val userModel: LoginViewModel by activityViewModels()
+    private lateinit var userDataPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val activity = requireActivity()
+        userDataPreferences = activity.getSharedPreferences("userData", Context.MODE_PRIVATE)
 
         USERNAME = ""
         EMAIL = ""
@@ -31,7 +34,11 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        if (userModel.isLogedIn()) {
+        val username = userDataPreferences.getString("username", null)
+        val userPassword = userDataPreferences.getString("password", null)
+        val isLoggedIn = username != null && userPassword != null
+
+        if (isLoggedIn) {
             findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
         }
         // Inflate the layout for this fragment
@@ -43,8 +50,7 @@ class RegisterFragment : Fragment() {
 
         registerButton.setOnClickListener {
             if (USERNAME != "" && EMAIL != "" && PASSWORD != "") {
-                userModel.setUsername(USERNAME)
-                userModel.setPassword(PASSWORD)
+
                 findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
             } else {
                 Toast.makeText(activity, "Fill the username and password first!", Toast.LENGTH_LONG)
