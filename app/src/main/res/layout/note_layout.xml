@@ -31,16 +31,4 @@
         app:layout_constraintTop_toBottomOf="@id/noteTitle"
         android:id="@+id/noteCreatedAt"/>
 
-    <Button
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/delete"
-        android:drawablePadding="5dp"
-        android:drawableTint="@color/primary"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/deleteNoteButton"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
